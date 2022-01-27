@@ -8,6 +8,9 @@ import os
 def parse_args():
     # Parse Arguments
     parser = argparse.ArgumentParser()
+    parser.add_argument('--template_path', type=str, dest='template_path',
+                        default='E:/dataset/golf/reference_frames/reference_frames/top_template.jpg',
+                        help='the path to the template image')
     parser.add_argument('--front_view_path', type=str, dest='front_view_path',
                         default='E:/dataset/golf/reference_frames/reference_frames/first_frames',
                         help='the path to front-view images')
@@ -151,7 +154,7 @@ def main():
     args = parse_args()
     filenames = os.listdir(args.front_view_path)
     ref_pts = np.float32([[750, 1082], [1698, 1220], [1874, 1136], [1057, 1005]])
-    hole = cv2.imread('E:/dataset/golf/reference_frames/reference_frames/top_template.jpg')
+    hole = cv2.imread(args.template_path)
     square_size = compute_square_size(ref_pts)
     for filename in filenames:
         filepath = os.path.join(args.front_view_path, filename)
